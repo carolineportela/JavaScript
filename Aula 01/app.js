@@ -28,10 +28,6 @@ seja uma variavel,um processamento,a chamada de um metodo possa acontecer
 um retorno de dados automaticamente,sem precisa sair deste processamento
 */
 
-
-
-
-
 //  \n pula uma linha
 //o function vai me retornar dados
 
