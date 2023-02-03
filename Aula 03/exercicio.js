@@ -1,6 +1,6 @@
 
 /*
-Criar um app que tenha como entrada 02 valores e realize as quatro opções matematicas,as operações devem
+Objetivo : Criar um app que tenha como entrada 02 valores e realize as quatro opções matematicas,as operações devem
 também ser ser digitadas pelo usuário
 -SOMAR,SUBTRAIR,MULTIPLICAR,DIVIDIR
 */
