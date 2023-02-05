@@ -1,7 +1,10 @@
-/*
-Objetivo : Projeto para realizar calculos matematicos(versão professor)
-*/
+/***************************************************************
+ * Objetivo: Projeto para realizar calculos matématicos (Versão Professor)
+ * Data: 03/02/2023
+ * Versão: 1.0
+ **************************************************************/
 
+//sempre colocar a extensao se ela foi criada por você
 //Import da biblioteca da calculadora
 var matematica = require('./modulo/calculadora.js');
 
@@ -12,81 +15,49 @@ var readline = require('readline');
 var entradaDados = readline.createInterface({
     input: process.stdin,
     output: process.stdout
-
 });
 
-entradaDados.question('Valor: \n', function (numero1) {
-    //replace - metodo da classe string que localiza um caracter e substitui por outro 
-    let valor01 = numero1.replace(',', '.');
+    //valor 1
+    entradaDados.question('Valor 1: \n', function (numero1) {
+    //replace - metodo da classe string que localiza em caracter e subtitui por outro
+    let valor1 = numero1.replace(',', '.');
 
-    entradaDados.question('Valor2: \n', function (numero2) {
-        let valor02 = numero2.replace(',', ',');
+    //Alguns exemplos de metodos importantes da classe String
+    //replace, subtring, legth, upercase, lowercase, indexof, trim(eliminar espaços de uma linha)
 
-        entradaDados.question('Escolha uma opção : [Somar | Subtrair | Multiplicar | Dividir \n', function (tipoCalculo) {
-            let operacao = tipoCalculo.toUpperCase();
+    //valor 2
+      entradaDados.question('Valor 2: \n', function (numero2) {
+      let valor2 = numero2.replace(',', '.');
+
+        //tipo de operação matematica
+        entradaDados.question('Escolha uma operação matématica: [SOMAR | SUBTRAIR | MULTIPLICAR | DIVIDIR] \n', function (tipoCalculado) {
+
+            let operacao = tipoCalculado.toUpperCase();
+
             let resultado;
 
-            //Validação de entrada de dados vazio
-            if (valor01 == '' || valor02 == '' || operacao == '') {
-
-                //Validação para entrada de dados numericos
-                console.log('ERRO:Não é possivel calcular se alguma opção estiver em branco.');
-            } else if (isNaN(valor01) || isNaN(valor02)) {
-                console.log('Erro: Não é possivel calcular se os dados digitados não forem números');
+            //validação para entrada de dados vazio
+            if (valor1 == '' || valor2 == '' || operacao == '') {
+                console.log('ERRO: Não é possivel calcular se um dado estiver em branco');
+                
+            } else if (isNaN(valor1) || isNaN(valor2)) {
+                console.log('ERRO: Não é possivel calcular se os dados digitados não forem números.');
             } else {
-                //toUpperCase - converte uma string em MAIUSCULO
-                //toLowerCase - converte em minusculo
 
-                //     //Professor escolheu fazer os ifs sem abrir e fechar chave,é uma opção.Ele so colocou no DIVIDIR por que precisa realizar a conta.,
-                //    // function calculadora(numero1, numero2, tipoCalculo) {
-                //        // if (operacao == 'SOMAR')
-                //           //  resultado = Number(valor01) + Number(valor02);
-                //       //  else if (operacao == 'SUBTRAIR')
-                //             resultado = Number(valor01) - Number(valor02);
-                //         else if (operacao == 'MULTIPLICAR')
-                //             resultado = Number(valor01) * Number(valor02);
-                //         else if (operacao == 'DIVIDIR') {
-                //             if (valor02 == 0)
-                //                 console.log('Erro:Não é possivel realizar a divisão por 0.');
-                //             else
-                //                 resultado = Number(valor01) / Number(valor02);
-                //         } else {
-                //             console.log('ERRO: A sua escolha de operacao matematica não foi valida');
-                //             //finaliza o call back do objeto de entrada de dados (Sai do programa)
-                //             entradaDados.close();
-                //         }
-                //         //Validação para tratar quando a variavel resultado não for processada por algum problema.
-                //         if (resultado == undefined)
-                //             console.log('Erro:Não foi possivel encontrar um valor válido.');
-                //         else
-                //             console.log(resultado);
-
-                /*
-                TUDO QUE ESTÁ COMENTADO EM CIMA,FOI PQ O PROFESSOR EXPLICOU QUE DEVEMOS FAZER UMA FUNcTION EM OUTRO ARQUIVO DA OPERACAO (arquivo na pasta modulo)
-   
-                */
-                resultado = matematica.calculadora(valor01, valor02, operacao);
-                if(resultado !=false)
-                console.log(resultado);
-                else
-                entradaDados.close();
-
+                resultado = matematica.calculadora(valor1, valor2, operacao);
+                if (resultado != false) {
+                    console.log(resultado);
+                } else {
+                    entradaDados.close
+                }
             }
 
         });
     });
-
 });
-
-//else if (typeof(valor1)! = 'number')
-//typeof()- Identifica o tipo de dados de um elemento
-// O isNaN - identificao tipo de conteudo independente do tipo de dados
-//let x = 10;
-//console.log (typeof(x))
-
-//----------------
-
-//alguns exemplos de métodos importantes da classe String
-//replace,substring,length,upercase,lowercase,indexof,trim
-
-//O Number,ParseFloat,ParseInt convertem a string em número
+            //toUpperCase - converte uma string em MAIUSCULO
+            //toLowerCase - converte uma string em MINUSCULO
+            //typeof() = identifica o tipo de dados de um elemento
+            // o isNaN - identifica o tipo de contéudo independente do tipo de dados
+            //let x = 10;
+            //console.log(typeof(x));
