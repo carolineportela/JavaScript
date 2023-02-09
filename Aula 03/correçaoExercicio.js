@@ -45,10 +45,11 @@ var entradaDados = readline.createInterface({
             } else {
 
                 resultado = matematica.calculadora(valor1, valor2, operacao);
-                if (resultado != false) {
-                    console.log(resultado);
+                if (resultado == false && typeof(resultado)== 'boolean') {
+                    entradaDados.close         
                 } else {
-                    entradaDados.close
+                    console.log(resultado);
+                   
                 }
             }
 
