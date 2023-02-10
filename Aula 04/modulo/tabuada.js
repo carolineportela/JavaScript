@@ -4,6 +4,7 @@ Objetivo : Arquivo destinado ao processamentodo cálculo de uma tabuada
 Data 09/02
 Autor : Carol Portela
 Versão 1.0
+beck-end
 
 */
 //calcularTabuada retorna o processamento de uma tabuada qualquer até um contador qualquer.
@@ -41,6 +42,8 @@ const calcularTabuada = function (multiplicando,maxMultiplicador){
 };
 // Se quisermos ver se irá retornar true ou false,podemos fazer um console assim -> console.log(calcularTabuada(5,9));
 calcularTabuada(9,9);
+
+
 module.exports = {
     calcularTabuada
 }

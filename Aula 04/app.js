@@ -1,4 +1,6 @@
 
+//interação
+
 var matematica = require('./modulo/tabuada.js');
 
 // Import para entrada de dados
@@ -11,7 +13,7 @@ var entradaDados = readline.createInterface({
 });
 
 
-entradaDados.question('Digite o mínimo multiplicador\n', function (multiplicando) {
+entradaDados.question('Digite o multiplicador\n', function (multiplicando) {
     let numero1 = multiplicando;
 
     entradaDados.question('Digite o máximo multiplicador\n', function (maxMultiplicador) {
