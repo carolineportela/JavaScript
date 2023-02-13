@@ -41,7 +41,7 @@ const calcularTabuada = function (multiplicando,maxMultiplicador){
     return status;
 };
 // Se quisermos ver se irá retornar true ou false,podemos fazer um console assim -> console.log(calcularTabuada(5,9));
-calcularTabuada(9,9);
+calcularTabuada(9,4);
 
 
 module.exports = {

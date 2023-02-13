@@ -47,12 +47,3 @@ entradaDados.question('Digite o multiplicador\n', function (multiplicando) {
 });
 
 
-
-
-
-
-
-
-
-
-
