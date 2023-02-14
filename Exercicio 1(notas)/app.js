@@ -25,11 +25,11 @@ entradaDados.question('Nome do aluno:\n', function (nomeDoAluno) {
         let nomeProfessor = nomeDoProfessor;
 
         //sexo do aluno
-        entradaDados.question('Sexo do aluno:\n', function (sexoDoAluno) {
+        entradaDados.question('Sexo do aluno FEMININO ou MASCULINO:\n', function (sexoDoAluno) {
             let sexoAluno = sexoDoAluno;
 
             //sexo do Professor
-            entradaDados.question('Sexo do Professor:\n', function (sexoDoProfessor) {
+            entradaDados.question('Sexo do Professor FEMININO ou MASCULINO:\n', function (sexoDoProfessor) {
                 let sexoProfessor = sexoDoProfessor;
 
                 //nome do curso
@@ -62,43 +62,47 @@ entradaDados.question('Nome do aluno:\n', function (nomeDoAluno) {
 
                                         let mediaAluno = matematica.calcularMedia(nota1, nota2, nota3, nota4)
                                         console.log(mediaAluno);
+                                        // if (sexoDoAluno !== 'feminino' || sexoDoAluno !== 'masculino'){
+                                        //     console.log('ERRO: o sexo do professor(a) ou aluno (a) não forem inseridos corretamente.');
+                                        //     entradaDados.close();
+                                        // }
 
-                                        if (mediaAluno >= 70) {
-                                            console.log(`${sexAlu} ${nomeAluno} foi APROVADO na disciplina ${nomeDisciplina}`);
-                                            console.log(`Curso: ${nomeCurso}`);
-                                            console.log(`${sexProf} : ${nomeProfessor}`);
-                                            console.log(`Notas do aluno:${primeiraNota}, ${segundaNota}, ${terceiraNota}, ${quartaNota}`);
-                                            console.log(`Média final: ${mediaAluno}`);
+                                         if (mediaAluno >= 70) {
+                                            console.log(`${sexAlu} ${nomeAluno} foi APROVADO(A) na disciplina ${nomeDisciplina}.`);
+                                            console.log(`Curso: ${nomeCurso}.`);
+                                            console.log(`${sexProf} : ${nomeProfessor}.`);
+                                            console.log(`Notas do aluno:${primeiraNota}, ${segundaNota}, ${terceiraNota}, ${quartaNota}.`);
+                                            console.log(`Média final: ${mediaAluno}.`);
                                         } else if (mediaAluno <= 49) {
-                                            console.log(`${sexAlu} ${nomeAluno} foi REPROVADO na disciplina ${nomeDisciplina}`);
-                                            console.log(`Curso: ${nomeCurso}`);
-                                            console.log(`${sexProf} : ${nomeProfessor}`);
-                                            console.log(`Notas do aluno:${primeiraNota}, ${segundaNota}, ${terceiraNota}, ${quartaNota}`);
-                                            console.log(`Média final: ${mediaAluno}`);
+                                            console.log(`${sexAlu} ${nomeAluno} foi REPROVADO(A) na disciplina ${nomeDisciplina}.`);
+                                            console.log(`Curso: ${nomeCurso}.`);
+                                            console.log(`${sexProf} : ${nomeProfessor}.`);
+                                            console.log(`Notas do aluno: ${primeiraNota}, ${segundaNota}, ${terceiraNota}, ${quartaNota}.`);
+                                            console.log(`Média final: ${mediaAluno}.`);
 
                                         }
 
 
                                         if (mediaAluno >= 50 && mediaAluno <= 69) {
-                                            console.log('O aluno precisa fazer o exame');
+                                            console.log('O aluno precisa fazer o exame.');
                                             entradaDados.question('Digite a nota do exame: \n', function (notaDoExame) {
 
                                                 let resultado = matematica.exame(mediaAluno, notaDoExame)
 
                                                 if (resultado <= 59) {
-                                                    console.log(`${sexAlu} ${nomeAluno} foi REPROVADO na disciplina ${nomeDisciplina}`);
-                                                    console.log(`Curso: ${nomeCurso}`);
-                                                    console.log(`${sexProf} : ${nomeProfessor}`);
-                                                    console.log(`Notas do aluno:${primeiraNota}, ${segundaNota}, ${terceiraNota}, ${quartaNota}, ${notaDoExame}`);
-                                                    console.log(`Média final: ${mediaAluno}`);
-                                                    console.log(`Média do exame: ${resultado}`);
+                                                    console.log(`${sexAlu} ${nomeAluno} foi REPROVADO na disciplina ${nomeDisciplina}.`);
+                                                    console.log(`Curso: ${nomeCurso}.`);
+                                                    console.log(`${sexProf} : ${nomeProfessor}.`);
+                                                    console.log(`Notas do aluno:${primeiraNota}, ${segundaNota}, ${terceiraNota}, ${quartaNota}, ${notaDoExame}.`);
+                                                    console.log(`Média final: ${mediaAluno}.`);
+                                                    console.log(`Média do exame: ${resultado}.`);
 
                                                 } else if (resultado >= 59) {
-                                                    console.log(`${sexAlu} ${nomeAluno} foi APROVADO na disciplina ${nomeDisciplina}`);
-                                                    console.log(`Curso: ${nomeCurso}`);
-                                                    console.log(`${sexProf} : ${nomeProfessor}`);
-                                                    console.log(`Notas do aluno:${primeiraNota}, ${segundaNota}, ${terceiraNota}, ${quartaNota}, ${notaDoExame}`);
-                                                    console.log(`Média final: ${mediaAluno}`);
+                                                    console.log(`${sexAlu} ${nomeAluno} foi APROVADO na disciplina ${nomeDisciplina}.`);
+                                                    console.log(`Curso: ${nomeCurso}.`);
+                                                    console.log(`${sexProf} : ${nomeProfessor}.`);
+                                                    console.log(`Notas do aluno:${primeiraNota}, ${segundaNota}, ${terceiraNota}, ${quartaNota}, ${notaDoExame}.`);
+                                                    console.log(`Média final: ${mediaAluno}.`);
                                                     console.log(`Média do exame: ${resultado}`);
                                                 }
 

@@ -1,5 +1,5 @@
 
-   const calcularTabuada = function (numeroInicial, numeroFinal, contadorInicial, contadorFinal) {
+const calcularTabuada = function (numeroInicial, numeroFinal, contadorInicial, contadorFinal) {
 
     //tabuadaInicial a tabuada que se inicia 
     let tabuadaInicial = Number(String(numeroInicial).replace(',', '.'));
@@ -15,16 +15,16 @@
 
     let resultado;
     let status = true;
-   
+
 
     if (tabuadaInicial == 0 || contInicial == 0 || contFinal == 0) {
         status = false;
     } else if (isNaN(tabuadaInicial) || isNaN(contInicial) || isNaN(contFinal)) {
         status = false;
-    } else if (tabuadaInicial <2 || tabuadaInicial >100) {
+    } else if (tabuadaInicial < 2 || tabuadaFinal > 100) {
         console.log('Erro: As entradas só podem  ser entre 2 e 100, não são permitidos outros valores');
 
-    } else if (contInicial <1 || contInicial >50) {
+    } else if (contInicial < 1 || contadorFinal > 50) {
         console.log('ERRO: O valor até onde será calculada a tabuada deverá ser entre 1 e 50');
     }
 
@@ -33,9 +33,8 @@
         for (let cont = tabuadaInicial; cont <= tabuadaFinal; cont++) {
             console.log('\nTabuada do:' + cont);
 
-            //contador  tá recebendo a tabuadaInicial; contador se for menor ou igual ao contFinal vai vai adicionar mais um e mudar o valor da segunda casinha kk.
-            for (let contador = contInicial ; contador <= contFinal; contador++) {
-                //console.log(contador);
+            //contador  tá recebendo o contInicial ( que é o contador inicial da tabuada inicial); contador se for menor ou igual ao contFinal vai adicionar mais um e mudar o valor da segunda casinha kk.
+            for (let contador = contInicial; contador <= contFinal; contador++) {
                 resultado = contador * cont
                 console.log(`${cont} X ${contador} = ${resultado}`);
             }
@@ -45,8 +44,12 @@
     return status;
 };
 
-calcularTabuada(2, 8, 3, 12);
+calcularTabuada(3, 3, 0, 51);
 
 module.exports = {
     calcularTabuada
 }
+
+    //esse else if só funciona a parte do >50,o <1 quando eu digito o 0 não cai no erro.
+    //else if (contInicial <1 || contadorFinal >50) {
+    //console.log('ERRO: O valor até onde será calculada a tabuada deverá ser entre 1 e 50');

@@ -54,15 +54,16 @@ const exame = function (calcularMedia, notaDoExame) {
 }
 
 const sexAl = function (sexoDoAluno) {
-    if (sexoDoAluno == 'f' || sexoDoAluno == 'F') {
+    if (sexoDoAluno == 'feminino' || sexoDoAluno == 'FEMININO') {
         return 'A Aluna'
         }else{
             return 'O Aluno'
         }
+       
 }
 
 const sexProf = function (sexoDoProfessor) {
-    if (sexoDoProfessor == 'f'|| sexoDoProfessor == 'F') {
+    if (sexoDoProfessor == 'feminino'|| sexoDoProfessor == 'FEMININO') {
         return 'Professora'
         }else{
             return 'Professor'
