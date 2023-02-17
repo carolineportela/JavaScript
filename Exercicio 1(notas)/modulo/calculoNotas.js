@@ -71,6 +71,7 @@ const sexProf = function (sexoDoProfessor) {
 }
 
 
+
 //deixa global
 module.exports = {
     calcularMedia,

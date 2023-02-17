@@ -29,5 +29,3 @@ entradaDados.question('Digite o número da tabuada inicial: ', function (tabuada
 })
 
         
-
-

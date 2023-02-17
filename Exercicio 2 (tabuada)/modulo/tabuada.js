@@ -49,7 +49,3 @@ calcularTabuada(3, 3, 0, 51);
 module.exports = {
     calcularTabuada
 }
-
-    //esse else if só funciona a parte do >50,o <1 quando eu digito o 0 não cai no erro.
-    //else if (contInicial <1 || contadorFinal >50) {
-    //console.log('ERRO: O valor até onde será calculada a tabuada deverá ser entre 1 e 50');
