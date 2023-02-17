@@ -1,4 +1,4 @@
-matematica = require('./modulo/imparPar.js');
+var calculoImpar = require('./modulo/imparPar.js');
 
 var readline = require('readline');
 
@@ -7,21 +7,20 @@ var entradaDados = readline.createInterface({
     output: process.stdout
 })
 
-entradaDados.question('Digite o primeiro número:'), function (numeroInicial){
-     let primeiroNumero = numeroInicial
+entradaDados.question('Digite o número Inicial: \n', function (numeroInicio) {
+    numeroInicial = numeroInicio;
 
-     entradaDados.question('Digite o segundo número:'), function (numeroFinal){
-        let segundoNumero = numeroFinal
+    entradaDados.question('Digite o número Final: \n', function (numeroFim) {
+        numeroFinal = numeroFim;
 
+        console.log('1 - PAR');
+        console.log('2 - IMPAR');
+        console.log('3 - PAR E IMPAR');
+        entradaDados.question('Digite a sua opção: ', function (opcaoEscolhida) {
+            opcao = opcaoEscolhida;
 
-        entradaDados.question('Escolha uma opção 1 - Os Impares  2 - Os Pares  3 - Os dois '), function (){
-            let opcaoDoUsuario = opcao
+            calculoImpar.getImparPar(numeroInicial, numeroFinal, opcao);
 
-            //matematica.getImparPar(numeroInicio, numeroFim, opcaoEscolhida)
-
-        }
-          
-
-     }
-    
-}
+        })
+    })
+})
