@@ -319,52 +319,75 @@ const listagemProdutos = function () {
     listProdutosJSON.produtos[0].modelos = listModelosMonitor;
     listProdutosJSON.produtos[1].modelos = listModelosMonitor;
 
-    //Teclados
-    // listProdutosJSON.produtos[2].modelos = listModelosTeclados;
-    // listProdutosJSON.produtos[3].modelos = listModelosTeclados;
-    // listProdutosJSON.produtos[4].modelos = listModelosTeclados;
-    // listProdutosJSON.produtos[5].modelos = listModelosTeclados;
+    //Addicionar modelos aos teclados
+    listProdutosJSON.produtos[2].modelos = listModelosTeclados;
+    listProdutosJSON.produtos[3].modelos = listModelosTeclados;
+    listProdutosJSON.produtos[4].modelos = listModelosTeclados;
+    listProdutosJSON.produtos[5].modelos = listModelosTeclados;
 
     console.log(listProdutosArray)
-     
+
     // console.log('Nome:' + listProdutosJSON.produtos[1].nome);
     // console.log('Marca:' + listProdutosJSON.produtos[1].marca);
     // console.log('Valor:' + listProdutosJSON.produtos[1].valor);
     // console.log('Cor:' + listProdutosJSON.produtos[1].cores[1]);
     // console.log('Modelo:' + listProdutosJSON.produtos[1].modelos[1]);
 
+    //--Versão Professor--fazer aparecer nome do produto,marca,valor,todas as cores existentes p cada um dos produtos,e todos modelos existentes p cada um dos produtos.
+    //percorre o array de produtos para listar os itens
+    listProdutosJSON.produtos.forEach(function (itemProduto) {
+        console.log('Nome:' + itemProduto.nome);
+        console.log('Marca:' + itemProduto.marca);
+        console.log('Valor:' + itemProduto.valor);
+
+        if (itemProduto.cores != undefined) {
+            //percorre o array de cores que está dentro do Array de produtos que é representado pelo (item)
+            itemProduto.cores.forEach(function (itemCor) {
+                console.log('*** Cores' + itemCor)
+            });
+
+        }
+        if (itemProduto.modelos != undefined) {
+            itemProduto.modelos.forEach(function (itemModelo) {
+                console.log('* Modelo' + itemModelo);
+            });
+        }
+        console.log('---------------');
+
+    });
+
+
     // console.log(listProdutosJSON.produtos[1].nome);
     // console.log(listProdutosJSON.produtos[1].marca);
-    // console.log(listProdutosJSON.produtos[0]);
+    // console.log(listProdutosJSON.produtos[1].valor);
 
-    //nome do produto,marca,valor,todas as cores existentes p cada um dos produtos,e todos modelos existentes p cada um dos produtos.
-    
 
+    //--tentamos na sala mas n conseguimos arrumar o for--fazer aparecer nome do produto,marca,valor,todas as cores existentes p cada um dos produtos,e todos modelos existentes p cada um dos produtos.
 
     // console.log('-----Exemplo com FOREACH------');
     // listProdutosJSON.forEach(function (caracteristicas) {
     //     console.log();
     // });
-  
+
+    /*  nosso for do final da aula
     for (let contador in listProdutosJSON.produtos) {
-        console.log('O nome do produto é:' + listProdutosJSON.produtos[contador].nome);   
-        console.log('A marca do produto é:' + listProdutosJSON.produtos[contador].marca);
-        console.log('O valor do produto é:' + listProdutosJSON.produtos[contador].valor);
-      
-
-        for (let contadorCores = 0; contadorCores < contador; contadorCores++) {
-            console.log('Cores:' + listProdutosJSON.produtos[contadorCores].cores);
-            break;   
-        
+         console.log('O nome do produto é:' + listProdutosJSON.produtos[contador].nome);   
+         console.log('A marca do produto é:' + listProdutosJSON.produtos[contador].marca);
+         console.log('O valor do produto é:' + listProdutosJSON.produtos[contador].valor);
+       
+    
+         for (let contadorCores = 0; contadorCores < contador; contadorCores++) {
+             console.log('Cores:' + listProdutosJSON.produtos[contadorCores].cores);
             
-        }
-         console.log('---------------------------')
-        //  for(let contadorDois in listProdutosJSON.produtos){
-        //     console.log('O modelo do produto é: ' + listProdutosJSON.produtos[contadorDois].modelos) 
-            
-        //  }
-
-    }
+             
+         }
+          console.log('---------------------------')
+         //  for(let contadorDois in listProdutosJSON.produtos){
+         //     console.log('O modelo do produto é: ' + listProdutosJSON.produtos[contadorDois].modelos) 
+             
+         //  }
+    
+     }*/
 
 
 
@@ -398,4 +421,15 @@ listagemProdutos();
 
 
 
-
+/*
+    Millena pediu pra copiar
+    for(let contProdutos =0; contProdutos<listProdutosJSON.produtos.length; contProdutos++){
+   console.log('Nome:' + listProdutosJSON.produtos[contProdutos].nome);
+   console.log('Marca:' + listProdutosJSON.produtos[contProdutos].marca);
+ 
+   for (let contCores =0; contCores < listProdutosJSON.produtos[contProdutos].cores.length;contCores){
+       console.log('Cores'+  contCores < listProdutosJSON.produtos[contProdutos].cores[contCores]);
+   }
+  
+}
+*/
