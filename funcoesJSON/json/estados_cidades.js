@@ -22501,42 +22501,192 @@ module.exports = {
 
 }
 
-console.log(estadosCidades.estados[0].sigla);
- //Criar a primeira função getListaDeEstados que retornará a lista de todos estados do brasil.
+// console.log(estadosCidades.estados[0].sigla);
 
-// console.log(estados.estadosCidades);
-// //1 Passo
-// //criar um json
 
- //2 passo
-//criar um array que vai conter as siglas,guardar dentro de um array com o nome uf
+//1 Exercicio - Criar a primeira função getListaDeEstados que retornará a lista de todos estados do brasil.
+const getListaDeEstados = function () {
+   //1 Passo - criar um json
+   // Criando JSON
+   let listUfJSON = {};
 
- const getListaDeEstados = function(){
-   //console.log(estadosCidades.sigla);
+   //2 passo - criar um array que vai conter as siglas,guardar dentro de um array com o nome uf.
+   // Criando ARRAY
+   let listUfArray = [];
 
-   //criando o JSON vazio
-   let listUFJSON = {}
+   //Add ARRAY de Uf dentro de um JSON
+   listUfJSON.uf = listUfArray;
 
-   //criando a array vazia
-   let listUFArray = []
-   
-   //adicionando a array de uf dentro de um JSON
-   listUFJSONuf = listUFArray
+   //for each que está olhando todas as uf de estados
+   estadosCidades.estados.forEach(function (ufEstado) {
+      //Adicionar o item dentro da array
+      listUfArray.push(ufEstado.sigla)
 
-   //for each que está olhando todos as uf de estados
-   estadosCidades.estados.forEach(function(ufEstado){
-      listUFArray.push(ufEstado.sigla);
+      //colocando a quantidade de itens que tem dentro da array
+      listUfJSON.quantidade = listUfArray.length;
+   });
+   //retornando a função
+   return listUfJSON
+   // console.log(listUfJSON);
+}
+//console.log(getListaDeEstados());
 
+
+/* -------------------------------------------------------*/
+
+
+//2 Exercicio - Criar uma função (getDadosEstado) que retorna as informações referente a um estado do Brasil,
+// onde a sigla do estado será o critério de filtro. 
+const getDadosEstado = function (sigla) {
+
+   let uf = sigla;
+
+   //Criando JSON
+   let listDados = {};
+
+
+   //for each que verifica as informacoes
+   estadosCidades.estados.forEach(function (dados) {
+
+      if (uf === dados.sigla) {
+         listDados.uf = dados.sigla
+         listDados.descricao = dados.nome
+         listDados.capital = dados.capital
+         listDados.regiao = dados.regiao
+      } else {
+         return false;
+      }
 
    });
-
-return listUFJSON
-   
- }
-
-console.log(getListaDeEstados());
+   return listDados;
+}
+//console.log(getDadosEstado('RJ'));
 
 
-// estadosCidades.estados.forEach(function(uf){
-//    console.log('UF:' + uf.sigla);
-// })
+/* ----------------------------------------------------- */
+
+//3 Exercicio - Criar uma função (getCapitalEstado) que retorna as informações referente a capital de um estado 
+//do Brasil, onde a sigla do estado será o critério de filtro.
+const getCapitalEstado = function (sigla) {
+   let uf = sigla;
+
+   //Criando JSON
+   let listDados = {};
+
+   //for each que vai olhar os itens
+   estadosCidades.estados.forEach(function (dados) {
+
+      if (uf === dados.sigla) {
+         listDados.uf = dados.sigla
+         listDados.descricao = dados.nome
+         listDados.capital = dados.capital
+      } else {
+         return false;
+      }
+
+   });
+   return listDados;
+}
+//console.log(getCapitalEstado('RJ'));
+
+
+/* ----------------------------------------------------- */
+
+//ARRUMAR ESSA FUNCAO
+//4 - Criar uma função (getEstadosRegiao) que retorna as informações referente aos estados do Brasil conforme a sua
+// região, onde a região será o critério de filtro
+const getEstadosRegiao = function (regiao) {
+   let jsonListaRegiao = {}
+   let ufListaArray = []
+   let ufLista = regiao
+
+   estadosCidades.estados.forEach(function (estado) {
+      if (ufLista === estado.regiao) {
+
+         let ufListaJSON = {}
+         ufListaJSON.uf = estado.sigla
+         ufListaJSON.descricao = estado.nome
+
+         ufListaArray.push(ufListaJSON)
+      } else {
+         return false
+      }
+
+      jsonListaRegiao.regiao = regiao
+      jsonListaRegiao.estados = ufListaArray
+   })
+   return jsonListaRegiao
+}
+//console.log(getEstadosRegiao('SUL'));
+
+
+/* ----------------------------------------------------- */
+
+//5 Exercicio - Criar uma função (getCapitalPais) que retorna as informações referente aos estados que formam a capital
+// do Brasil.
+const getCapitalPais = function () {
+   let jsonCapitais = {}
+   let arrayCapitais = []
+
+   estadosCidades.estados.forEach(function (estado) {
+      let jsonInfoCapital = {}
+      if (estado.capital_pais) {
+         jsonInfoCapital.capital_atual = estado.capital_pais.capital
+         jsonInfoCapital.uf = estado.sigla
+         jsonInfoCapital.descricao = estado.nome
+         jsonInfoCapital.capital = estado.capital
+         jsonInfoCapital.regiao = estado.regiao
+         jsonInfoCapital.capital_pais_ano_inicio = estado.capital_pais.ano_inicio
+         jsonInfoCapital.capital_pais_ano_termino = estado.capital_pais.ano_fim
+
+         arrayCapitais.push(jsonInfoCapital)
+      } else {
+         return false
+      }
+      jsonCapitais.capital = arrayCapitais
+   })
+   return jsonCapitais
+}
+//console.log(getCapitalPais());
+
+
+/* ----------------------------------------------------- */
+
+// 6 Exercicio - Criar uma função (getCidades) que retorna uma lista de cidades, filtrado pela sigla do estado. 
+const getCidades = function (sigla) {
+   let jsonRegiao = {}
+   let arrayCidades = []
+   let ufRegiao = sigla
+
+   estadosCidades.estados.forEach(function (estado) {
+      if (ufRegiao == estado.sigla) {
+
+         jsonRegiao.uf = estado.sigla
+         jsonRegiao.descricao = estado.nome
+         jsonRegiao.quantidade_cidades = estado.cidades.length
+
+         estado.cidades.forEach(function (cidade) {
+            arrayCidades.push(cidade.nome)
+         })
+      } else {
+         return false
+      }
+   })
+
+   jsonRegiao.cidades = arrayCidades
+   return jsonRegiao
+}
+//console.log(getCidades('RJ'));
+
+
+
+
+
+
+
+
+
+
+
+
+
