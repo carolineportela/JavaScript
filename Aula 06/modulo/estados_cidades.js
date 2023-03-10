@@ -22677,7 +22677,15 @@ const getCidades = function (sigla) {
    return jsonRegiao
 }
 //console.log(getCidades('SP'));
+module.exports = {
+   getListaDeEstados,
+   getDadosEstado,
+   getCapitalEstado,
+   getEstadosRegiao,
+   getCapitalPais,
+   getCidades
 
+}
 
 
 
