@@ -22544,6 +22544,7 @@ const getDadosEstado = function (sigla) {
    //Criando JSON
    let listDados = {};
 
+   let status = false;
 
    //for each que verifica as informacoes
    estadosCidades.estados.forEach(function (dados) {
@@ -22553,12 +22554,17 @@ const getDadosEstado = function (sigla) {
          listDados.descricao = dados.nome
          listDados.capital = dados.capital
          listDados.regiao = dados.regiao
-      } else {
-         return false;
-      }
 
+         status = true;
+      }
    });
-   return listDados;
+
+   if (status == true) {
+      return listDados
+   } else {
+      return false
+   }
+ 
 }
 //console.log(getDadosEstado('RJ'));
 
