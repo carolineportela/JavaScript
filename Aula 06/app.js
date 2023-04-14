@@ -62,6 +62,8 @@ app.use((request, response, next) => {
 //asynic - ele aguarda o processamento da funçao,assim que ele processar ele devolve os dados 
 //Obs : se nao usar o async a requisição é perdida,pois o front acha a API fora do ar
 
+            /*   EndPoints abaixo    */
+
 //EndPoint para listar todos os estados
 app.get('/estados', cors(), async function (request, response, next) {
 
@@ -108,26 +110,26 @@ app.get('/estado/:uf', cors(), async function (request, response, next) {
         }
     }
     //retorna o codigo e o json
-    response.statusCode(statusCode);
+    response.status(statusCode);
     response.json(dadosEstado)
 
 });
 
 //EndPoint para retorna as informações referente a capital de um estado do Brasil, onde a sigla do estado será o critério de filtro.getCapitalEstado.]
-app.get('/estadocapital/:uf', cors(), async function(request, response, next) {
+app.get('/estadocapital/:uf', cors(), async function (request, response, next) {
     let statusCode;
     let dadosEstado = {}
 
     let siglaEstado = request.params.uf
 
-    if(siglaEstado == '' || siglaEstado == undefined || siglaEstado.length !=2 || !isNaN(siglaEstado)){
+    if (siglaEstado == '' || siglaEstado == undefined || siglaEstado.length != 2 || !isNaN(siglaEstado)) {
         statusCode = 400;
-        dadosEstado.message =  'Não foi possivel processar, pois os dados de entrada (uf) que foi enviado não corrensponde ao que foi exigido. Confira o valor, pois não pode ser vazio, precisa ser caracteres e ter 2 dígitos.'
+        dadosEstado.message = 'Não foi possivel processar, pois os dados de entrada (uf) que foi enviado não corrensponde ao que foi exigido. Confira o valor, pois não pode ser vazio, precisa ser caracteres e ter 2 dígitos.'
     } else {
         //Chama a função para retornar os dados do estado
         let capital = estadosCidades.getCapitalEstado(siglaEstado)
 
-        if(capital){
+        if (capital) {
             statusCode = 200
             dadosEstado = capital;
         } else {
@@ -141,40 +143,122 @@ app.get('/estadocapital/:uf', cors(), async function(request, response, next) {
 
 
 //EndPoint pra listar os estados de acordo com a regiao (getEstadosRegiao)
-app.get('/estadoregiao/:regiao',cors(),async function (request,response,next){
+app.get('/estadoregiao/:regiao', cors(), async function (request, response, next) {
     let statusCode;
     let dadosEstado = {}
 
     let regiao = request.params.regiao
 
-    if(regiao == '' || regiao == undefined || !isNaN(regiao)){
+    if (regiao == '' || regiao == undefined || !isNaN(regiao)) {
         statusCode = 400;
-        dadosEstado.message =  'Não foi possivel processar, pois os dados de entrada (uf) que foi enviado não corrensponde ao que foi exigido. Confira o valor, pois não pode ser vazio, precisa ser caracteres e ter 2 dígitos.'
+        dadosEstado.message = 'Não foi possivel processar, pois os dados de entrada (uf) que foi enviado não corrensponde ao que foi exigido. Confira o valor, pois não pode ser vazio, precisa ser caracteres e ter 2 dígitos.'
     } else {
 
-          //Chama a função para retornar os dados do estado       
-          let estadosDaRegiao = estadosCidades.getEstadosRegiao(regiao)
-          if(estadosDaRegiao){
+        //Chama a função para retornar os dados do estado       
+        let estadosDaRegiao = estadosCidades.getEstadosRegiao(regiao)
+        if (estadosDaRegiao) {
             statusCode = 200
             dadosEstado = estadosDaRegiao;
         } else {
             statusCode = 404
         }
     }
-     //Retorna o codigo e o JSON
-     response.status(statusCode)
-     response.json(dadosEstado)
+    //Retorna o codigo e o JSON
+    response.status(statusCode)
+    response.json(dadosEstado)
 
 });
 
 //EndPoint pra listar  as informações referente aos estados que formam a capital do Brasil (getCapitalPais)
-app.get('/estadocapital/:capital', cors(),async function (request,response,next){
-    
+app.get('/capital', cors(), async function (request, response, next) {
+    //Chama a função que vai listar todos os estados
+    let capitalPais = estadosCidades.getCapitalPais();
 
-
-
+    //Tratamento para validar o sucesso da requisição
+    if (capitalPais) {
+        response.status(200);
+        response.json(capitalPais);
+    } else {
+        response.status(500);
+    }
 });
 
+ //EndPoint que retorna uma lista de cidades, filtrado pela sigla do estado (minha versao)
+ app.get('/cidades/:uf', cors(), async function(request, response, next) {
+    let statusCode
+    let cidades = {}
+
+    let siglaEstado = request.params.uf
+
+    if(siglaEstado == '' || siglaEstado == undefined || !isNaN(siglaEstado)){
+        statusCode = 400;
+        cidades.message = 'Não foi possivel processar, pois os dados de entrada (uf) que foi enviado não corrensponde ao que foi exigido. Confira o valor, pois não pode ser vazio, precisa ser caracteres e ter 2 dígitos.';
+    } else {
+        //Chama a função para retornar os dados do estado
+        let cidadesEstado = estadosCidades.getCidades(siglaEstado)
+
+        if(cidadesEstado){
+            statusCode = 200
+            cidades = cidadesEstado
+        } else {
+            statusCode = 404
+        }
+    }
+    //Retorna o codigo e o JSON
+    response.status(statusCode)
+    response.json(cidades)
+});
+
+ //EndPoint que retorna uma lista de cidades, filtrado pela sigla do estado (versao professor)
+ app.get('/v2/cidades', cors(), async function(request, response, next) {
+
+     /*
+
+      Existem 2 opcoes para receber variaveis sobre filtro:
+      - params - que permite receber a variavel na estrutura da URL criada no endPoint (geralmente utilizado para ID (PK))
+
+      - query - Também conhecido como queryString permite receber uma ou muitas variaveis para realizar filtros avançados
+
+      */
+
+     //recebe uma variavel encaminhada via QueryString
+     let siglaEstado =  request.query.uf
+    //  let cepEstado =  request.query.cep
+    //  let populacaoEstado =  request.query.populacao;
+
+    let statusCode
+    let cidades = {}
+
+
+    if(siglaEstado == '' || siglaEstado == undefined || !isNaN(siglaEstado)){
+        statusCode = 400;
+        cidades.message = 'Não foi possivel processar, pois os dados de entrada (uf) que foi enviado não corrensponde ao que foi exigido. Confira o valor, pois não pode ser vazio, precisa ser caracteres e ter 2 dígitos.';
+    } else {
+        //Chama a função para retornar os dados do estado
+        let cidadesEstado = estadosCidades.getCidades(siglaEstado)
+
+        if(cidadesEstado){
+            statusCode = 200
+            cidades = cidadesEstado
+        } else {
+            statusCode = 404
+        }
+    }
+    //Retorna o codigo e o JSON
+    response.status(statusCode)
+    response.json(cidades)
+});
+
+    
+
+    //  console.log(siglaEstado);
+    //  console.log(cepEstado);
+    //  console.log(populacaoEstado);
+
+ 
+
+
+ 
 
 
 

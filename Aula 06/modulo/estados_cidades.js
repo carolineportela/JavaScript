@@ -22539,7 +22539,7 @@ const getListaDeEstados = function () {
 // onde a sigla do estado será o critério de filtro. 
 const getDadosEstado = function (sigla) {
 
-   let uf = sigla;
+   let uf = sigla.toUpperCase();
 
    //Criando JSON
    let listDados = {};
@@ -22566,15 +22566,16 @@ const getDadosEstado = function (sigla) {
    }
  
 }
-//console.log(getDadosEstado('RJ'));
+console.log(getDadosEstado('RJ'));
 
 
 /* ----------------------------------------------------- */
 
+
 //3 Exercicio - Criar uma função (getCapitalEstado) que retorna as informações referente a capital de um estado 
 //do Brasil, onde a sigla do estado será o critério de filtro.
 const getCapitalEstado = function (sigla) {
-   let uf = sigla;
+   let uf = sigla.toUpperCase();;
 
    //Criando JSON
    let listDados = {};
@@ -22607,7 +22608,7 @@ const getEstadosRegiao = function (regiao) {
    let ufLista = regiao
 
    estadosCidades.estados.forEach(function (estado) {
-      if (ufLista === estado.regiao) {
+      if (ufLista.toUpperCase() === estado.regiao.toUpperCase()) {
 
          let ufListaJSON = {}
          ufListaJSON.uf = estado.sigla
@@ -22662,7 +22663,7 @@ const getCapitalPais = function () {
 const getCidades = function (sigla) {
    let jsonRegiao = {}
    let arrayCidades = []
-   let ufRegiao = sigla
+   let ufRegiao = sigla.toUpperCase();
 
    estadosCidades.estados.forEach(function (estado) {
       if (ufRegiao == estado.sigla) {
