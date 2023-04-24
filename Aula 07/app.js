@@ -38,12 +38,39 @@ app.use((request, response, next) => {
 
 //EndPoint:Retorna todos os dados de alunos
 app.get('/v1/lion-school/aluno', cors(), async function (request, response) {
+    let controllerAluno = require ('./controller/controller_aluno.js');
 
+    //Recebe os dados da controller do aluno
+    let dadosAluno = await controllerAluno.getAlunos();
+
+    //Valida se existe registros de aluno
+    if(dadosAluno){
+        response.json(dadosAluno);
+        response.status(200);
+    }else{
+        response.json();
+        response.status(404);
+    }
 
 });
 
 //EndPoint: Retorna o aluno filtrando pelo ID (id do banco de dados)
 app.get('/v1/lion-school/aluno/:id', cors(), async function (request, response) {
+
+    let idAluno = request.params.id;
+
+    let controllerAluno = require ('./controller/controller_aluno');
+
+    let dadosAlunoId = await controllerAluno.getBuscarAlunoID(idAluno);
+
+   
+    if(dadosAlunoId){
+        response.json(dadosAlunoId);
+        response.status(200)
+    }else{
+        response.json();
+        response.status(404);
+    }
 
 
 });
