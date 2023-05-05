@@ -6,30 +6,85 @@
  ********************************************* */
 
 //Import da biblioteca do prisma cliente,ele que permite dar alguns comandos.
-let { PrismaClient } = require('@prisma/client');
+var { PrismaClient } = require('@prisma/client');
 
 //Instancia da classe PrismaClient
-let prisma = new PrismaClient();
+var prisma = new PrismaClient();
 
 
 //Inserir dados do aluno no banco de dados
-const insertAluno = function (dadosAluno) {
+const insertAluno = async function (dadosAluno) {
+
+    //scriptSQL para inserir dados
+    let sql = `insert into tbl_aluno (
+                nome,
+                rg,
+                cpf,
+                data_nascimento,
+                email
+                ) values (
+                '${dadosAluno.nome}',
+                '${dadosAluno.rg}',
+                '${dadosAluno.cpf}',
+                '${dadosAluno.data_nascimento}',
+                '${dadosAluno.email}'
+
+            )`;
+
+    //Executa o scrip sql no banco de dados        
+    let resultStatus = await prisma.$executeRawUnsafe(sql);
+    if (resultStatus) {
+        return true;
+    } else {
+        return false;
+    }
 
 }
 
 //Atualizar aluno existente no banco de dados
-const updateAluno = function (dadosAluno) {
+const updateAluno = async function (dadosAluno) {
+    //ScriptSQL para atualizar os dados no banco de dados
 
-}
+    let sql = `update tbl_aluno set
+                        nome = '${dadosAluno.nome}',
+                        rg = '${dadosAluno.rg}',
+                        cpf = '${dadosAluno.cpf}',
+                        data_nascimento = '${dadosAluno.data_nascimento}',
+                        email = '${dadosAluno.email}'
+                where id = ${dadosAluno.id}`;
+    console.log(sql);
+
+    //Executa o scrip sql no banco de dados        
+    let resultStatus = await prisma.$executeRawUnsafe(sql);
+    if (resultStatus) {
+        return true;
+    } else {
+        return false;
+    }
+
+
+};
 
 //Excluir aluno existente no banco de dados
-const deleteAluno = function (id) {
+const deleteAluno = async function (id) {
+
+    let idAluno = id;
+
+    //Script para deletar o aluno
+    let sql = `delete from tbl_aluno where id = ${idAluno}`
+    
+    let resultStatus = await prisma.$executeRawUnsafe(sql);
+
+    if (resultStatus) {
+        return true;
+    } else {
+        return false;
+    }
 
 }
 
 //Retornar todos os alunos do banco de dados
 const selectAllAlunos = async function () {
-
 
 
     //SriptSQL para buscar todos os itens no banco de dados
@@ -66,25 +121,32 @@ const selectByIdAluno = async function (id) {
     }
 }
 
-// //Retornar o aluno filtrando pelo nome
-// const selectByNameAluno = async function (nome) {
-//     let idAluno = id
+//Retorna o aluno filtrando pelo nome
+const selectByNameAluno = async function (name) {
 
-//     let sql = `select * from tbl_aluno where nome like  ${nome}`;
+    let nameAluno = name
+    console.log(nameAluno);
 
-//     let rsAlunoNome = await prisma.$queryRawUnsafe(sql);
+    //Script para buscar um aluno filtrando pelo nome
+    let sql = `select * from tbl_aluno where nome like '%${nameAluno}%'`;
 
-//     if (rsAlunoNome.length > 0) {
-//         return rsAlunoNome;
-//     }
-//     else {
-//         return false;
-//     }
-// }
+    console.log(sql);
+    let rsAluno = await prisma.$queryRawUnsafe(sql)
+
+    //Valida de o Banco de Dados retornou algum registro
+    if (rsAluno.length > 0) {
+        return rsAluno
+    } else {
+        return false;
+    }
+}
 
 module.exports = {
     selectAllAlunos,
-    selectByIdAluno
-    // selectByIdAlunoNome
+    selectByIdAluno,
+    insertAluno,
+    selectByNameAluno,
+    updateAluno,
+    deleteAluno
 
 }
