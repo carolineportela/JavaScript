@@ -12,7 +12,8 @@ const ERROR_REQUIRED_FIELDS = { status: 400, message: 'Campos obrigatorios não 
 const ERROR_INTERNAL_SERVER = { status: 500, message: 'Devido a um erro interno no servidor,não foi possível processar a requisição.' }
 const ERROR_INVALID_ID = { status: 400, message: 'O ID informado na equisição não é valido ou não foi encaminhado.' }
 const ERROR_INVALID_CONTENT_TYPE = {status:415, message: 'O tipo de mídia content type da solicitação não é compativel com o servidor. Tipo aceito : [application/json]'}
-const ERROR_DELETE = {status:404, message: 'ERROR : Esse ID já foi excluido'}
+const ERROR_DELETE = {status:404, message: 'ERROR :     Esse ID já foi excluido'}
+const ERROR_NOT_FOUND = {status:404, message: 'ERROR :  Nemhum item encontrado na requisição.'}
 
 
 
@@ -22,6 +23,7 @@ const ERROR_DELETE = {status:404, message: 'ERROR : Esse ID já foi excluido'}
 const SUCCESS_CREATED_ITEM = { status: 201, message: 'Item criado com sucesso.' }
 const SUCCESS_UPDATED_ITEM = { status: 200, message: 'Item atualizado com sucesso.'}
 const SUCCESS_DELETE_ITEM = { status: 200, message: 'Item deletado com sucesso.'}
+const SUCCESS_REQUEST = { status: 200, message: 'Reqisição com sucesso.'}
 
 
 module.exports = {
@@ -32,5 +34,7 @@ module.exports = {
     SUCCESS_UPDATED_ITEM,
     ERROR_INVALID_CONTENT_TYPE,
     SUCCESS_DELETE_ITEM,
-    ERROR_DELETE
+    ERROR_DELETE,
+    SUCCESS_REQUEST,
+    ERROR_NOT_FOUND
 }

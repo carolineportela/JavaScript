@@ -45,14 +45,15 @@ const insertAluno = async function (dadosAluno) {
 const updateAluno = async function (dadosAluno) {
     //ScriptSQL para atualizar os dados no banco de dados
 
+
     let sql = `update tbl_aluno set
-                        nome = '${dadosAluno.nome}',
-                        rg = '${dadosAluno.rg}',
-                        cpf = '${dadosAluno.cpf}',
-                        data_nascimento = '${dadosAluno.data_nascimento}',
-                        email = '${dadosAluno.email}'
-                where id = ${dadosAluno.id}`;
-    console.log(sql);
+    nome = '${dadosAluno.nome}',
+    rg = '${dadosAluno.rg}',
+    cpf = '${dadosAluno.cpf}',
+    data_nascimento = '${dadosAluno.data_nascimento}',
+    email = '${dadosAluno.email}'
+    where id = ${dadosAluno.id}`;
+
 
     //Executa o scrip sql no banco de dados        
     let resultStatus = await prisma.$executeRawUnsafe(sql);
@@ -72,7 +73,7 @@ const deleteAluno = async function (id) {
 
     //Script para deletar o aluno
     let sql = `delete from tbl_aluno where id = ${idAluno}`
-    
+
     let resultStatus = await prisma.$executeRawUnsafe(sql);
 
     if (resultStatus) {
@@ -141,12 +142,26 @@ const selectByNameAluno = async function (name) {
     }
 }
 
+//Retorna o ultimo ID inserido no banco de dados
+const selectLastId = async function () {
+
+    let sql = 'select * from tbl_aluno order by id desc limit 1;'
+
+    let rsAluno = await prisma.$queryRawUnsafe(sql)
+
+    if (rsAluno.length > 0) {
+        return rsAluno
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
     selectAllAlunos,
     selectByIdAluno,
     insertAluno,
     selectByNameAluno,
     updateAluno,
-    deleteAluno
-
+    deleteAluno,
+    selectLastId
 }

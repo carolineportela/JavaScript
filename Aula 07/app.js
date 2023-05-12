@@ -50,14 +50,8 @@ app.get('/v1/lion-school/aluno', cors(), async function (request, response) {
     //Recebe os dados da controller do aluno
     let dadosAluno = await controllerAluno.getAlunos();
 
-    //Valida se existe registros de aluno
-    if (dadosAluno) {
-        response.json(dadosAluno);
-        response.status(200);
-    } else {
-        response.json();
-        response.status(404);
-    }
+    response.status(dadosAluno.status)
+    response.json(dadosAluno)
 
 });
 
@@ -68,17 +62,12 @@ app.get('/v1/lion-school/aluno/id/:id', cors(), async function (request, respons
 
     // let controllerAluno = require('./controller/controller_aluno');
 
-    let dadosAlunoId = await controllerAluno.getBuscarAlunoID(idAluno);
+    let dadosAluno = await controllerAluno.getBuscarAlunoID(idAluno);
 
 
-    if (dadosAlunoId) {
-        response.json(dadosAlunoId);
-        response.status(200)
-    } else {
-        response.json();
-        response.status(404);
-    }
-
+    response.status(dadosAluno.status)
+    response.json(dadosAluno)
+    
 
 });
 
@@ -147,12 +136,13 @@ app.put('/v1/lion-school/aluno/:id', cors(), bodyParserJSON, async function (req
         response.json(message.ERROR_INVALID_CONTENT_TYPE)
     }
 
+    
+
 
 });
 
 //EndPoint: Exclui um aluno/dado existente, filtrando pelo nome
 app.delete('/v1/lion-school/aluno/:id', cors(),async function (request, response) {
-
 
      let idAluno = request.params.id;
 
@@ -168,7 +158,6 @@ app.delete('/v1/lion-school/aluno/:id', cors(),async function (request, response
         response.json();
         response.status(404);
     }
-
 
 
 });
